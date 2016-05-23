@@ -22,7 +22,7 @@ public extension UIView {
         }
     }
     
-    private var tooltipView: ZGTooltipView? {
+    public var tooltipView: ZGTooltipView? {
         get {
             return objc_getAssociatedObject(self, &tooltipViewKey) as? ZGTooltipView
         }
