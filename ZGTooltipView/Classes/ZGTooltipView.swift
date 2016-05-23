@@ -71,7 +71,6 @@ public class ZGTooltipView: UIView {
     
     public var animationEnable = true
     
-    private var bgColor = UIColor(white: 0, alpha: 0.8)
     private var isVisible = false
     private var contentView : UIView!
     private var direction : Direction = .Left
@@ -85,6 +84,8 @@ public class ZGTooltipView: UIView {
         self.init(frame:CGRectZero)
         self.direction = direction
         
+        setup()
+
         contentView = createLabelWithText(text)
     }
     
@@ -92,7 +93,13 @@ public class ZGTooltipView: UIView {
         self.init(frame:CGRectZero)
         self.direction = direction
         
+        setup()
+        
         contentView = customView
+    }
+    
+    private func setup() {
+        self.backgroundColor = UIColor(white: 0, alpha: 0.8)
     }
     
     private func createLabelWithText(text:String) -> UILabel {
@@ -151,7 +158,7 @@ public class ZGTooltipView: UIView {
         let triangleShapeLayer = CAShapeLayer()
         triangleShapeLayer.bounds = trianglePath.bounds
         triangleShapeLayer.path = trianglePath.CGPath
-        triangleShapeLayer.fillColor = bgColor.CGColor
+        triangleShapeLayer.fillColor = self.backgroundColor!.CGColor
         
         return triangleShapeLayer
     }
@@ -161,8 +168,8 @@ public class ZGTooltipView: UIView {
         
         superview.addSubview(self)
         
-        self.backgroundColor = bgColor
-        self.layoutMargins = UIEdgeInsetsMake(5, 10, 5, 10)
+        self.backgroundColor = self.backgroundColor
+        self.layoutMargins = UIEdgeInsetsMake(8, 13, 8, 13)
         self.layer.cornerRadius = 4
         
         switch self.direction {

@@ -32,8 +32,10 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        let t = ZGTooltipView(direction: .Bottom, text: "Bottom Text")
+       // t.backgroundColor = UIColor.blueColor()
         
-        B_Button.setTooltip(ZGTooltipView(direction: .Bottom, text: "Bottom Text"))
+        B_Button.setTooltip(t)
         BL_Button.setTooltip(ZGTooltipView(direction: .BottomLeft, text: "Bottom Left Text"))
         BR_Button.setTooltip(ZGTooltipView(direction: .BottomRight, text: "Bottom Right Text"))
         T_Button.setTooltip(ZGTooltipView(direction: .Top, text: "Top Text"))
