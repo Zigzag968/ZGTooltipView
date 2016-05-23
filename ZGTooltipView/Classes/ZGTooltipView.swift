@@ -102,7 +102,7 @@ public class ZGTooltipView: UIView {
         self.backgroundColor = UIColor(white: 0, alpha: 0.8)
     }
     
-    private func createLabelWithText(text:String) -> UILabel {
+    public func createLabelWithText(text:String) -> UILabel {
         
         let label = UILabel(frame:CGRectZero)
         label.textColor = UIColor.whiteColor()
