@@ -70,6 +70,11 @@ public class ZGTooltipView: UIView {
     static let triangleMargin : CGFloat = 10
     
     public var animationEnable = true
+    public override var backgroundColor: UIColor? {
+        didSet {
+            triangleShapeLayer.fillColor = backgroundColor?.CGColor
+        }
+    }
     
     private var isVisible = false
     private var contentView : UIView!
@@ -168,7 +173,6 @@ public class ZGTooltipView: UIView {
         
         superview.addSubview(self)
         
-        self.backgroundColor = self.backgroundColor
         self.layoutMargins = UIEdgeInsetsMake(8, 13, 8, 13)
         self.layer.cornerRadius = 4
         
