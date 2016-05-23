@@ -7,7 +7,8 @@
 
 ## Example
 
-[![Screenshot](https://github.com/Zigzag968/ZGTooltipView/blob/master/Example/Screenshot.png?raw=true)]
+![Screenshot](https://github.com/Zigzag968/ZGTooltipView/blob/master/Example/Screenshot.png?raw=true)
+
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
