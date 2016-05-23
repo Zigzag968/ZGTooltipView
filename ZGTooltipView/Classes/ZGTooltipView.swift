@@ -72,7 +72,7 @@ public class ZGTooltipView: UIView {
     public var animationEnable = true
     public override var backgroundColor: UIColor? {
         didSet {
-            triangleShapeLayer.fillColor = backgroundColor?.CGColor
+            triangleShapeLayer?.fillColor = backgroundColor?.CGColor
         }
     }
     
