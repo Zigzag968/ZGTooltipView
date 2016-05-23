@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ZGTooltipView_Example' do
+  pod 'ZGTooltipView', :path => '../'
+
+  target 'ZGTooltipView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
