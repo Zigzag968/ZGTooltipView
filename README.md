@@ -11,6 +11,17 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+## How to use ?
+
+Just call on your view :
+
+    myView.setTooltip(ZGTooltipView(direction: .Top, text: "Lorem ipsum dolor sit amet"))
+
+You can use these directions : 
+
+    .Top, .Left, .Right, .Bottom, .TopLeft, .TopRight, .BottomLeft, .BottomRight
+
+
 ## Requirements
 
 ## Installation
