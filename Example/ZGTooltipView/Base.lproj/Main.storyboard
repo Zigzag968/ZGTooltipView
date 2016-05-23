@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
@@ -18,41 +17,60 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lyY-29-Gi5">
-                                <rect key="frame" x="0.0" y="70" width="320" height="448"/>
+                                <rect key="frame" x="0.0" y="70" width="320" height="404"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Abh-k5-Shf">
                                         <rect key="frame" x="149" y="0.0" width="22" height="22"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6x-UY-tpa">
-                                        <rect key="frame" x="149" y="61" width="22" height="22"/>
+                                        <rect key="frame" x="149" y="54.5" width="22" height="22"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gt6-WD-1jA">
-                                        <rect key="frame" x="149" y="121.5" width="22" height="22"/>
+                                        <rect key="frame" x="149" y="109" width="22" height="22"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQB-QH-lME">
-                                        <rect key="frame" x="149" y="182.5" width="22" height="22"/>
+                                        <rect key="frame" x="149" y="163.5" width="22" height="22"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzL-p7-hay">
-                                        <rect key="frame" x="149" y="243.5" width="22" height="22"/>
+                                        <rect key="frame" x="149" y="218.5" width="22" height="22"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Us-Wy-Ekp">
-                                        <rect key="frame" x="149" y="304.5" width="22" height="22"/>
+                                        <rect key="frame" x="149" y="273" width="22" height="22"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eF1-7h-Dtz">
-                                        <rect key="frame" x="149" y="365" width="22" height="22"/>
+                                        <rect key="frame" x="149" y="327.5" width="22" height="22"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gL7-71-eXt">
-                                        <rect key="frame" x="149" y="426" width="22" height="22"/>
+                                        <rect key="frame" x="149" y="382" width="22" height="22"/>
                                     </button>
                                 </subviews>
                             </stackView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Khg-V6-Bdc">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Show all" id="Gwl-5n-Sz4">
+                                        <connections>
+                                            <action selector="showAllTooltips:" destination="vXZ-lx-hvc" id="skW-RZ-4gh"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="eNh-Kv-MwP"/>
+                                    <barButtonItem title="Hide all" id="Ahh-oO-aSU">
+                                        <connections>
+                                            <action selector="hideAllTooltips:" destination="vXZ-lx-hvc" id="PGc-EC-8XW"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Khg-V6-Bdc" firstAttribute="top" secondItem="lyY-29-Gi5" secondAttribute="bottom" constant="50" id="0C1-MH-JLC"/>
+                            <constraint firstAttribute="trailing" secondItem="Khg-V6-Bdc" secondAttribute="trailing" id="39u-hG-YWU"/>
                             <constraint firstAttribute="trailing" secondItem="lyY-29-Gi5" secondAttribute="trailing" id="9E5-WB-TpM"/>
                             <constraint firstItem="lyY-29-Gi5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="IJH-ki-KpA"/>
+                            <constraint firstItem="Khg-V6-Bdc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Qdz-ro-kjx"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Khg-V6-Bdc" secondAttribute="bottom" id="TGr-Ih-nbl"/>
                             <constraint firstItem="lyY-29-Gi5" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="kgi-eW-1dr"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="lyY-29-Gi5" secondAttribute="bottom" constant="50" id="ned-2k-YyZ"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

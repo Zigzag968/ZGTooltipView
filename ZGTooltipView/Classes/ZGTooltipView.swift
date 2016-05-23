@@ -46,13 +46,23 @@ public extension UIView {
         tooltipView?.dismiss(remove:true)
     }
     
+    public func showTooltip() {
+        if tooltipView?.isVisible == false {
+            tooltipView?.displayInView(self)
+        }
+    }
+    
+    public func dismissTooltip(remove remove:Bool = false) {
+        tooltipView?.dismiss(remove:remove)
+    }
+    
     @objc private func tooltipGestureHandler(gesture:UIGestureRecognizer) {
         
         if let tooltipView = tooltipView {
-            tooltipView.isVisible ? tooltipView.dismiss(remove:false) : tooltipView.displayInView(self)
+            tooltipView.isVisible ? dismissTooltip(remove:false) : showTooltip()
         }
     }
-
+    
 }
 
 public class ZGTooltipView: UIView {
@@ -60,7 +70,7 @@ public class ZGTooltipView: UIView {
     static let triangleMargin : CGFloat = 10
     
     public var animationEnable = true
-
+    
     private var bgColor = UIColor(white: 0, alpha: 0.8)
     private var isVisible = false
     private var contentView : UIView!
@@ -204,12 +214,12 @@ public class ZGTooltipView: UIView {
         }
         
         let triangleSpacing : CGFloat = self.direction == .Bottom || self.direction == .BottomRight || self.direction == .BottomLeft || self.direction == .Top || self.direction == .TopLeft || self.direction == .TopRight ? (triangleShapeLayer.bounds.height/2 + 5)  : (triangleShapeLayer.bounds.width/2 + 5)
-    
+        
         self.setNeedsLayout()
         self.layoutIfNeeded()
         
         switch self.direction {
-    
+            
         case .Bottom, .BottomLeft, .BottomRight:
             superview.addConstraint(NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: superview, attribute: .Bottom, multiplier: 1, constant:  triangleSpacing - (self.bounds.height / 2) ))
             break
@@ -217,7 +227,7 @@ public class ZGTooltipView: UIView {
         case .Top, .TopRight, .TopLeft:
             superview.addConstraint(NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: superview, attribute: .Top, multiplier: 1, constant:  (triangleSpacing - (self.bounds.height / 2)) * -1))
             break
-        
+            
         case .Left, .Right:
             superview.addConstraint(NSLayoutConstraint(item: superview, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant:  0))
             break
@@ -240,7 +250,7 @@ public class ZGTooltipView: UIView {
             self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant:  0))
             break
         }
-
+        
         if (animationEnable) {
             
             self.layer.transform = CATransform3DMakeScale(0, 0, 1)
@@ -319,7 +329,7 @@ public class ZGTooltipView: UIView {
         case .BottomRight:
             triangleShapeLayer.anchorPoint = CGPointMake(0.5, 1)
             triangleShapeLayer.position = CGPointMake(self.bounds.width - ZGTooltipView.triangleMargin, 0)
-
+            
             break
         }
         

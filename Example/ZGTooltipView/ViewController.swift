@@ -20,15 +20,18 @@ class ViewController: UIViewController {
     @IBOutlet var R_Button : UIButton!
     @IBOutlet var L_Button : UIButton!
     
+    var buttons : [UIButton]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        buttons = [B_Button, BL_Button, BR_Button, T_Button, TL_Button, TR_Button, R_Button, L_Button]
     }
     
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let buttons = [B_Button, BL_Button, BR_Button, T_Button, TL_Button, TR_Button, R_Button, L_Button]
         
         B_Button.setTooltip(ZGTooltipView(direction: .Bottom, text: "Bottom Text"))
         BL_Button.setTooltip(ZGTooltipView(direction: .BottomLeft, text: "Bottom Left Text"))
@@ -42,6 +45,18 @@ class ViewController: UIViewController {
         
         for button in buttons {
             button.performSelector(Selector("tooltipGestureHandler:"), withObject: UITapGestureRecognizer())
+        }
+    }
+    
+    @IBAction func showAllTooltips(sender: AnyObject) {
+        for button in buttons {
+            button.showTooltip()
+        }
+    }
+    
+    @IBAction func hideAllTooltips(sender: AnyObject) {
+        for button in buttons {
+            button.dismissTooltip()
         }
     }
     
