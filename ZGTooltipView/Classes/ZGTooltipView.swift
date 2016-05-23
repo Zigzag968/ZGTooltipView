@@ -80,7 +80,7 @@ public class ZGTooltipView: UIView {
         case Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight
     }
     
-    required convenience public init(direction:Direction, text:String) {
+     convenience public init(direction:Direction, text:String) {
         self.init(frame:CGRectZero)
         self.direction = direction
         
@@ -89,7 +89,7 @@ public class ZGTooltipView: UIView {
         contentView = createLabelWithText(text)
     }
     
-    required convenience public init(direction:Direction, customView:UIView) {
+     convenience public init(direction:Direction, customView:UIView) {
         self.init(frame:CGRectZero)
         self.direction = direction
         
