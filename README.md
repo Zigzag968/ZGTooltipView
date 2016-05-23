@@ -26,4 +26,5 @@ Alexandre Guibert, alexandre@evaneos.com
 
 ## License
 
+Tooltip view for iOS
 ZGTooltipView is available under the MIT license. See the LICENSE file for more info.
