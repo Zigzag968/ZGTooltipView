@@ -13,7 +13,7 @@ private var tooltipViewKey: UInt8 = 0
 
 public extension UIView {
     
-    private var tooltipTapGesture: UITapGestureRecognizer? {
+    public var tooltipTapGesture: UITapGestureRecognizer? {
         get {
             return objc_getAssociatedObject(self, &tooltipTapGestureKey) as? UITapGestureRecognizer
         }
