@@ -1,19 +1,19 @@
 {
   "name": "ZGTooltipView",
-  "version": "0.1.0",
-  "summary": "A short description of ZGTooltipView.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/ZGTooltipView",
+  "version": "1.2.7",
+  "summary": "Tooltip View for iOS",
+  "description": "Tooltip View for iOS.",
+  "homepage": "https://github.com/Zigzag968/ZGTooltipView",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Alexandre Guibert": "alexandre@evaneos.com"
+    "Alexandre Guibert": "alexandre968@hotmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/ZGTooltipView.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/Zigzag968/ZGTooltipView.git",
+    "tag": "v1.2.6"
   },
   "platforms": {
     "ios": "8.0"
