@@ -31,7 +31,7 @@ public extension UIView {
         }
     }
     
-    public func setTooltip(tooltipView:ZGTooltipView) {
+    public func setTooltip(_ tooltipView:ZGTooltipView) {
         self.tooltipView = tooltipView
         
         tooltipTapGesture = UITapGestureRecognizer(target: self, action: #selector(UIView.tooltipGestureHandler(_:)))
@@ -52,11 +52,11 @@ public extension UIView {
         }
     }
     
-    public func dismissTooltip(remove remove:Bool = false) {
+    public func dismissTooltip(remove:Bool = false) {
         tooltipView?.dismiss(remove:remove)
     }
     
-    @objc private func tooltipGestureHandler(gesture:UIGestureRecognizer) {
+    @objc fileprivate func tooltipGestureHandler(_ gesture:UIGestureRecognizer) {
         
         if let tooltipView = tooltipView {
             tooltipView.isVisible ? dismissTooltip(remove:false) : showTooltip()
@@ -65,28 +65,28 @@ public extension UIView {
     
 }
 
-public class ZGTooltipView: UIView {
+open class ZGTooltipView: UIView {
     
     static let triangleMargin : CGFloat = 10
     
-    public var animationEnable = true
-    public override var backgroundColor: UIColor? {
+    open var animationEnable = true
+    open override var backgroundColor: UIColor? {
         didSet {
-            triangleShapeLayer?.fillColor = backgroundColor?.CGColor
+            triangleShapeLayer?.fillColor = backgroundColor?.cgColor
         }
     }
     
-    private var isVisible = false
-    private var contentView : UIView!
-    private var direction : Direction = .Left
-    private var triangleShapeLayer : CAShapeLayer!
+    fileprivate var isVisible = false
+    fileprivate var contentView : UIView!
+    fileprivate var direction : Direction = .left
+    fileprivate var triangleShapeLayer : CAShapeLayer!
     
     @objc public enum Direction : Int {
-        case Left, Right, Top, Bottom, TopLeft, TopRight, BottomLeft, BottomRight
+        case left, right, top, bottom, topLeft, topRight, bottomLeft, bottomRight
     }
     
      convenience public init(direction:Direction, text:String) {
-        self.init(frame:CGRectZero)
+        self.init(frame:CGRect.zero)
         self.direction = direction
         
         setup()
@@ -95,7 +95,7 @@ public class ZGTooltipView: UIView {
     }
     
      convenience public init(direction:Direction, customView:UIView) {
-        self.init(frame:CGRectZero)
+        self.init(frame:CGRect.zero)
         self.direction = direction
         
         setup()
@@ -103,73 +103,73 @@ public class ZGTooltipView: UIView {
         contentView = customView
     }
     
-    private func setup() {
+    fileprivate func setup() {
         self.backgroundColor = UIColor(white: 0, alpha: 0.8)
     }
     
-    public func createLabelWithText(text:String) -> UILabel {
+    open func createLabelWithText(_ text:String) -> UILabel {
         
-        let label = UILabel(frame:CGRectZero)
-        label.textColor = UIColor.whiteColor()
+        let label = UILabel(frame:CGRect.zero)
+        label.textColor = UIColor.white
         label.text = text
-        label.font = UIFont.systemFontOfSize(13)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.numberOfLines = 0
-        label.addConstraint(NSLayoutConstraint(item: label, attribute: .Width, relatedBy: .LessThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: UIScreen.mainScreen().bounds.width * 0.7))
+        label.addConstraint(NSLayoutConstraint(item: label, attribute: .width, relatedBy: .lessThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIScreen.main.bounds.width * 0.7))
         
         return label
     }
     
-    private func directionIsVertical() -> Bool {
+    fileprivate func directionIsVertical() -> Bool {
         
-        return (direction == .Top || direction == .TopRight || direction == .TopLeft || direction == .Bottom || direction == .BottomRight || direction == .BottomLeft)
+        return (direction == .top || direction == .topRight || direction == .topLeft || direction == .bottom || direction == .bottomRight || direction == .bottomLeft)
     }
     
-    private func createTriangleShapeLayer() -> CAShapeLayer {
+    fileprivate func createTriangleShapeLayer() -> CAShapeLayer {
         
         let trianglePath = UIBezierPath()
         
         switch self.direction {
-        case .Left:
-            trianglePath.moveToPoint(CGPointMake(0, 12))
-            trianglePath.addLineToPoint(CGPointMake(7, 6))
-            trianglePath.addLineToPoint(CGPointMake(0, 0))
-            trianglePath.addLineToPoint(CGPointMake(0, 12))
+        case .left:
+            trianglePath.move(to: CGPoint(x: 0, y: 12))
+            trianglePath.addLine(to: CGPoint(x: 7, y: 6))
+            trianglePath.addLine(to: CGPoint(x: 0, y: 0))
+            trianglePath.addLine(to: CGPoint(x: 0, y: 12))
             break
             
-        case .Right:
-            trianglePath.moveToPoint(CGPointMake(7, 12))
-            trianglePath.addLineToPoint(CGPointMake(0, 6))
-            trianglePath.addLineToPoint(CGPointMake(7, 0))
-            trianglePath.addLineToPoint(CGPointMake(7, 12))
+        case .right:
+            trianglePath.move(to: CGPoint(x: 7, y: 12))
+            trianglePath.addLine(to: CGPoint(x: 0, y: 6))
+            trianglePath.addLine(to: CGPoint(x: 7, y: 0))
+            trianglePath.addLine(to: CGPoint(x: 7, y: 12))
             break
             
-        case .Bottom, .BottomRight, .BottomLeft:
-            trianglePath.moveToPoint(CGPointMake(0, 7))
-            trianglePath.addLineToPoint(CGPointMake(12, 7))
-            trianglePath.addLineToPoint(CGPointMake(6, 0))
-            trianglePath.addLineToPoint(CGPointMake(0, 7))
+        case .bottom, .bottomRight, .bottomLeft:
+            trianglePath.move(to: CGPoint(x: 0, y: 7))
+            trianglePath.addLine(to: CGPoint(x: 12, y: 7))
+            trianglePath.addLine(to: CGPoint(x: 6, y: 0))
+            trianglePath.addLine(to: CGPoint(x: 0, y: 7))
             break
             
-        case .Top, .TopRight, .TopLeft:
-            trianglePath.moveToPoint(CGPointMake(0, 0))
-            trianglePath.addLineToPoint(CGPointMake(12, 0))
-            trianglePath.addLineToPoint(CGPointMake(6, 7))
-            trianglePath.addLineToPoint(CGPointMake(0, 0))
+        case .top, .topRight, .topLeft:
+            trianglePath.move(to: CGPoint(x: 0, y: 0))
+            trianglePath.addLine(to: CGPoint(x: 12, y: 0))
+            trianglePath.addLine(to: CGPoint(x: 6, y: 7))
+            trianglePath.addLine(to: CGPoint(x: 0, y: 0))
             break
         }
         
-        trianglePath.closePath()
+        trianglePath.close()
         
         let triangleShapeLayer = CAShapeLayer()
         triangleShapeLayer.bounds = trianglePath.bounds
-        triangleShapeLayer.path = trianglePath.CGPath
-        triangleShapeLayer.fillColor = self.backgroundColor!.CGColor
+        triangleShapeLayer.path = trianglePath.cgPath
+        triangleShapeLayer.fillColor = self.backgroundColor!.cgColor
         
         return triangleShapeLayer
     }
     
     
-    private func displayInView(superview:UIView) {
+    fileprivate func displayInView(_ superview:UIView) {
         
         superview.addSubview(self)
         
@@ -177,29 +177,29 @@ public class ZGTooltipView: UIView {
         self.layer.cornerRadius = 4
         
         switch self.direction {
-        case .Left:
-            self.layer.anchorPoint = CGPointMake(1, 0.5)
+        case .left:
+            self.layer.anchorPoint = CGPoint(x: 1, y: 0.5)
             break
-        case .Right:
-            self.layer.anchorPoint = CGPointMake(0, 0.5)
+        case .right:
+            self.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
             break
-        case .Bottom:
-            self.layer.anchorPoint = CGPointMake(0.5, 0)
+        case .bottom:
+            self.layer.anchorPoint = CGPoint(x: 0.5, y: 0)
             break
-        case .Top:
-            self.layer.anchorPoint = CGPointMake(0.5, 1)
+        case .top:
+            self.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
             break
-        case .TopLeft:
-            self.layer.anchorPoint = CGPointMake(0, 1)
+        case .topLeft:
+            self.layer.anchorPoint = CGPoint(x: 0, y: 1)
             break
-        case .TopRight:
-            self.layer.anchorPoint = CGPointMake(1, 1)
+        case .topRight:
+            self.layer.anchorPoint = CGPoint(x: 1, y: 1)
             break
-        case .BottomLeft:
-            self.layer.anchorPoint = CGPointMake(0, 0)
+        case .bottomLeft:
+            self.layer.anchorPoint = CGPoint(x: 0, y: 0)
             break
-        case .BottomRight:
-            self.layer.anchorPoint = CGPointMake(1, 0)
+        case .bottomRight:
+            self.layer.anchorPoint = CGPoint(x: 1, y: 0)
             break
         }
         
@@ -214,51 +214,51 @@ public class ZGTooltipView: UIView {
         self.addSubview(contentView)
         
         let constraintsAttrs = [
-            NSLayoutAttribute.Top:NSLayoutAttribute.TopMargin,
-            NSLayoutAttribute.Right:NSLayoutAttribute.RightMargin,
-            NSLayoutAttribute.Bottom:NSLayoutAttribute.BottomMargin,
-            NSLayoutAttribute.Left:NSLayoutAttribute.LeftMargin
+            NSLayoutAttribute.top:NSLayoutAttribute.topMargin,
+            NSLayoutAttribute.right:NSLayoutAttribute.rightMargin,
+            NSLayoutAttribute.bottom:NSLayoutAttribute.bottomMargin,
+            NSLayoutAttribute.left:NSLayoutAttribute.leftMargin
         ]
         
         for (fromAttr, toAttr) in constraintsAttrs {
-            self.addConstraint(NSLayoutConstraint(item: contentView, attribute: fromAttr, relatedBy: NSLayoutRelation.Equal, toItem:self, attribute: toAttr, multiplier: 1, constant: 0))
+            self.addConstraint(NSLayoutConstraint(item: contentView, attribute: fromAttr, relatedBy: NSLayoutRelation.equal, toItem:self, attribute: toAttr, multiplier: 1, constant: 0))
         }
         
-        let triangleSpacing : CGFloat = self.direction == .Bottom || self.direction == .BottomRight || self.direction == .BottomLeft || self.direction == .Top || self.direction == .TopLeft || self.direction == .TopRight ? (triangleShapeLayer.bounds.height/2 + 5)  : (triangleShapeLayer.bounds.width/2 + 5)
+        let triangleSpacing : CGFloat = self.direction == .bottom || self.direction == .bottomRight || self.direction == .bottomLeft || self.direction == .top || self.direction == .topLeft || self.direction == .topRight ? (triangleShapeLayer.bounds.height/2 + 5)  : (triangleShapeLayer.bounds.width/2 + 5)
         
         self.setNeedsLayout()
         self.layoutIfNeeded()
         
         switch self.direction {
             
-        case .Bottom, .BottomLeft, .BottomRight:
-            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: superview, attribute: .Bottom, multiplier: 1, constant:  triangleSpacing - (self.bounds.height / 2) ))
+        case .bottom, .bottomLeft, .bottomRight:
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superview, attribute: .bottom, multiplier: 1, constant:  triangleSpacing - (self.bounds.height / 2) ))
             break
             
-        case .Top, .TopRight, .TopLeft:
-            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: superview, attribute: .Top, multiplier: 1, constant:  (triangleSpacing - (self.bounds.height / 2)) * -1))
+        case .top, .topRight, .topLeft:
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1, constant:  (triangleSpacing - (self.bounds.height / 2)) * -1))
             break
             
-        case .Left, .Right:
-            superview.addConstraint(NSLayoutConstraint(item: superview, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant:  0))
+        case .left, .right:
+            superview.addConstraint(NSLayoutConstraint(item: superview, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant:  0))
             break
         }
         
         switch self.direction {
-        case .Left:
-            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .Right, relatedBy: .Equal, toItem: superview, attribute: .Left, multiplier: 1, constant: (triangleSpacing - (self.bounds.width / 2)) * -1))
+        case .left:
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: superview, attribute: .left, multiplier: 1, constant: (triangleSpacing - (self.bounds.width / 2)) * -1))
             break
-        case .BottomRight, .TopRight:
-            self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .Right, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: 1, constant:  ((self.bounds.width / 2)) * -1))
+        case .bottomRight, .topRight:
+            self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant:  ((self.bounds.width / 2)) * -1))
             break
-        case .BottomLeft, .TopLeft:
-            self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant:  ((self.bounds.width / 2))))
+        case .bottomLeft, .topLeft:
+            self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant:  ((self.bounds.width / 2))))
             break
-        case .Right:
-            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .Left, relatedBy: .Equal, toItem: superview, attribute: .Right, multiplier: 1, constant:  triangleSpacing - (self.bounds.width / 2) ))
+        case .right:
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .left, relatedBy: .equal, toItem: superview, attribute: .right, multiplier: 1, constant:  triangleSpacing - (self.bounds.width / 2) ))
             break
-        case .Top, .Bottom:
-            self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant:  0))
+        case .top, .bottom:
+            self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant:  0))
             break
         }
         
@@ -266,7 +266,7 @@ public class ZGTooltipView: UIView {
             
             self.layer.transform = CATransform3DMakeScale(0, 0, 1)
             
-            UIView.animateWithDuration(0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.5, options: .AllowUserInteraction, animations: {
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.5, options: .allowUserInteraction, animations: {
                 
                 self.layer.transform = CATransform3DMakeScale(1, 1, 1)
                 
@@ -279,17 +279,17 @@ public class ZGTooltipView: UIView {
         }
     }
     
-    func dismiss(remove remove:Bool) {
+    func dismiss(remove:Bool) {
         if (animationEnable) {
             self.layer.transform = CATransform3DMakeScale(1, 1, 1)
             
-            UIView.animateWithDuration(0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.5, options: .AllowUserInteraction, animations: {
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.5, options: .allowUserInteraction, animations: {
                 
                 self.layer.transform = CATransform3DMakeScale(0, 0, 1)
                 
                 }, completion: { (finished) in
                     
-                    dispatch_async(dispatch_get_main_queue(), {
+                    DispatchQueue.main.async(execute: {
                         if (remove) { self.removeFromSuperview() }
                     })
                     self.isVisible = !finished
@@ -303,43 +303,43 @@ public class ZGTooltipView: UIView {
         }
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         let triangleBounds = triangleShapeLayer.bounds
         
         switch self.direction {
-        case .Left:
-            triangleShapeLayer.anchorPoint = CGPointMake(0, 0.5)
-            triangleShapeLayer.position = CGPointMake(self.bounds.width, self.bounds.height/2)
+        case .left:
+            triangleShapeLayer.anchorPoint = CGPoint(x: 0, y: 0.5)
+            triangleShapeLayer.position = CGPoint(x: self.bounds.width, y: self.bounds.height/2)
             break
-        case .Right:
-            triangleShapeLayer.anchorPoint = CGPointMake(1, 0.5)
-            triangleShapeLayer.position = CGPointMake(0, self.bounds.height/2)
+        case .right:
+            triangleShapeLayer.anchorPoint = CGPoint(x: 1, y: 0.5)
+            triangleShapeLayer.position = CGPoint(x: 0, y: self.bounds.height/2)
             break
-        case .Bottom:
-            triangleShapeLayer.anchorPoint = CGPointMake(0.5, 1)
-            triangleShapeLayer.position = CGPointMake(self.bounds.width/2, 0)
+        case .bottom:
+            triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 1)
+            triangleShapeLayer.position = CGPoint(x: self.bounds.width/2, y: 0)
             break
-        case .Top:
-            triangleShapeLayer.anchorPoint = CGPointMake(0.5, 0)
-            triangleShapeLayer.position = CGPointMake(self.bounds.width/2, self.bounds.height)
+        case .top:
+            triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 0)
+            triangleShapeLayer.position = CGPoint(x: self.bounds.width/2, y: self.bounds.height)
             break
-        case .TopLeft:
-            triangleShapeLayer.anchorPoint = CGPointMake(0.5, 0)
-            triangleShapeLayer.position = CGPointMake(ZGTooltipView.triangleMargin, self.bounds.height)
+        case .topLeft:
+            triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 0)
+            triangleShapeLayer.position = CGPoint(x: ZGTooltipView.triangleMargin, y: self.bounds.height)
             break
-        case .TopRight:
-            triangleShapeLayer.anchorPoint = CGPointMake(0.5, 0)
-            triangleShapeLayer.position = CGPointMake(self.bounds.width - ZGTooltipView.triangleMargin, self.bounds.height)
+        case .topRight:
+            triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 0)
+            triangleShapeLayer.position = CGPoint(x: self.bounds.width - ZGTooltipView.triangleMargin, y: self.bounds.height)
             break
-        case .BottomLeft:
-            triangleShapeLayer.anchorPoint = CGPointMake(0.5, 1)
-            triangleShapeLayer.position = CGPointMake(ZGTooltipView.triangleMargin, 0)
+        case .bottomLeft:
+            triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 1)
+            triangleShapeLayer.position = CGPoint(x: ZGTooltipView.triangleMargin, y: 0)
             break
-        case .BottomRight:
-            triangleShapeLayer.anchorPoint = CGPointMake(0.5, 1)
-            triangleShapeLayer.position = CGPointMake(self.bounds.width - ZGTooltipView.triangleMargin, 0)
+        case .bottomRight:
+            triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 1)
+            triangleShapeLayer.position = CGPoint(x: self.bounds.width - ZGTooltipView.triangleMargin, y: 0)
             
             break
         }

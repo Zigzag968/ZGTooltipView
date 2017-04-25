@@ -29,29 +29,29 @@ class ViewController: UIViewController {
     }
     
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let t = ZGTooltipView(direction: .Bottom, text: "Bottom Text")
+        let t = ZGTooltipView(direction: .bottom, text: "Bottom Text")
         
         B_Button.setTooltip(t)
-        BL_Button.setTooltip(ZGTooltipView(direction: .BottomLeft, text: "Bottom Left Text"))
-        BR_Button.setTooltip(ZGTooltipView(direction: .BottomRight, text: "Bottom Right Text"))
-        T_Button.setTooltip(ZGTooltipView(direction: .Top, text: "Top Text"))
-        TL_Button.setTooltip(ZGTooltipView(direction: .TopLeft, text: "Top Left Text"))
-        TR_Button.setTooltip(ZGTooltipView(direction: .TopRight, text: "Top Right Text"))
-        R_Button.setTooltip(ZGTooltipView(direction: .Right, text: "Right Text"))
-        L_Button.setTooltip(ZGTooltipView(direction: .Left, text: "Left Text"))
+        BL_Button.setTooltip(ZGTooltipView(direction: .bottomLeft, text: "Bottom Left Text"))
+        BR_Button.setTooltip(ZGTooltipView(direction: .bottomRight, text: "Bottom Right Text"))
+        T_Button.setTooltip(ZGTooltipView(direction: .top, text: "Top Text"))
+        TL_Button.setTooltip(ZGTooltipView(direction: .topLeft, text: "Top Left Text"))
+        TR_Button.setTooltip(ZGTooltipView(direction: .topRight, text: "Top Right Text"))
+        R_Button.setTooltip(ZGTooltipView(direction: .right, text: "Right Text"))
+        L_Button.setTooltip(ZGTooltipView(direction: .left, text: "Left Text"))
 
     }
     
-    @IBAction func showAllTooltips(sender: AnyObject) {
+    @IBAction func showAllTooltips(_ sender: AnyObject) {
         for button in buttons {
             button.showTooltip()
         }
     }
     
-    @IBAction func hideAllTooltips(sender: AnyObject) {
+    @IBAction func hideAllTooltips(_ sender: AnyObject) {
         for button in buttons {
             button.dismissTooltip()
         }
