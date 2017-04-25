@@ -56,7 +56,7 @@ public extension UIView {
         tooltipView?.dismiss(remove:remove)
     }
     
-    @objc private func tooltipGestureHandler(_ gesture:UIGestureRecognizer) {
+    @objc fileprivate func tooltipGestureHandler(_ gesture:UIGestureRecognizer) {
         
         if let tooltipView = tooltipView {
             tooltipView.isVisible ? dismissTooltip(remove:false) : showTooltip()

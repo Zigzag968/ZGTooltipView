@@ -1,5 +1,5 @@
 PODS:
-  - ZGTooltipView (1.3.4)
+  - ZGTooltipView (1.2.7)
 
 DEPENDENCIES:
   - ZGTooltipView (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ZGTooltipView: d9e91bfaf09504326dae29fa3ec11c7a48732280
+  ZGTooltipView: 551abd04a3e9d6e5014d782d684ce2657a99a752
 
 PODFILE CHECKSUM: b7f8db003875034d8ff70f84657021cfe685bbbe
 

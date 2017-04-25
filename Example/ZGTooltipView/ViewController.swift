@@ -32,7 +32,9 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        B_Button.setTooltip(ZGTooltipView(direction: .bottom, text: "Bottom Text"))
+        let t = ZGTooltipView(direction: .bottom, text: "Bottom Text")
+        
+        B_Button.setTooltip(t)
         BL_Button.setTooltip(ZGTooltipView(direction: .bottomLeft, text: "Bottom Left Text"))
         BR_Button.setTooltip(ZGTooltipView(direction: .bottomRight, text: "Bottom Right Text"))
         T_Button.setTooltip(ZGTooltipView(direction: .top, text: "Top Text"))
@@ -40,7 +42,7 @@ class ViewController: UIViewController {
         TR_Button.setTooltip(ZGTooltipView(direction: .topRight, text: "Top Right Text"))
         R_Button.setTooltip(ZGTooltipView(direction: .right, text: "Right Text"))
         L_Button.setTooltip(ZGTooltipView(direction: .left, text: "Left Text"))
-        
+
     }
     
     @IBAction func showAllTooltips(_ sender: AnyObject) {

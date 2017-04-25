@@ -1,6 +1,6 @@
 {
   "name": "ZGTooltipView",
-  "version": "1.3.4",
+  "version": "1.2.7",
   "summary": "Tooltip View for iOS",
   "description": "Tooltip View for iOS.",
   "homepage": "https://github.com/Zigzag968/ZGTooltipView",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/Zigzag968/ZGTooltipView.git",
-    "tag": "v1.3.4"
+    "tag": "v1.2.6"
   },
   "platforms": {
     "ios": "8.0"
