@@ -54,7 +54,12 @@ public extension UIView {
             self.removeGestureRecognizer(gesture)
         }
         
-        tooltipView?.dismiss(remove:true)
+        tooltipView?.dismiss(remove: true)
+        
+        // Reset all variables
+        tooltipView = nil
+        tooltipDisplayView = nil
+        tooltipTapGesture = nil
     }
     
     public func showTooltip() {
@@ -63,14 +68,14 @@ public extension UIView {
         }
     }
     
-    public func dismissTooltip(remove:Bool = false) {
-        tooltipView?.dismiss(remove:remove)
+    public func dismissTooltip() {
+        tooltipView?.dismiss(remove: false)
     }
     
     @objc fileprivate func tooltipGestureHandler(_ gesture:UIGestureRecognizer) {
         
         if let tooltipView = tooltipView {
-            tooltipView.isVisible ? dismissTooltip(remove:false) : showTooltip()
+            tooltipView.isVisible ? dismissTooltip() : showTooltip()
         }
     }
     
