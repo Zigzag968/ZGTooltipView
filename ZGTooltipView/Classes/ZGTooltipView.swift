@@ -10,6 +10,7 @@ import UIKit
 
 private var tooltipTapGestureKey: UInt8 = 0
 private var tooltipViewKey: UInt8 = 0
+private var tooltipDisplayViewKey: UInt8 = 1
 
 public extension UIView {
     
@@ -30,9 +31,19 @@ public extension UIView {
             objc_setAssociatedObject(self, &tooltipViewKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
         }
     }
+
+    public var tooltipDisplayView: UIView? {
+        get {
+            return objc_getAssociatedObject(self, &tooltipDisplayViewKey) as? UIView
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &tooltipDisplayViewKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
     
-    public func setTooltip(_ tooltipView:ZGTooltipView) {
+    public func setTooltip(_ tooltipView:ZGTooltipView, displayInView displayView: UIView? = nil) {
         self.tooltipView = tooltipView
+        self.tooltipDisplayView = displayView
         
         tooltipTapGesture = UITapGestureRecognizer(target: self, action: #selector(UIView.tooltipGestureHandler(_:)))
         self.addGestureRecognizer(tooltipTapGesture!)
@@ -48,7 +59,7 @@ public extension UIView {
     
     public func showTooltip() {
         if tooltipView?.isVisible == false {
-            tooltipView?.displayInView(self)
+            tooltipView?.displayInView(tooltipDisplayView ?? self, origin: self)
         }
     }
     
@@ -169,39 +180,12 @@ open class ZGTooltipView: UIView {
     }
     
     
-    fileprivate func displayInView(_ superview:UIView) {
-        
+    fileprivate func displayInView(_ superview:UIView, origin: UIView) {
+
         superview.addSubview(self)
-        
+
         self.layoutMargins = UIEdgeInsetsMake(8, 13, 8, 13)
         self.layer.cornerRadius = 4
-        
-        switch self.direction {
-        case .left:
-            self.layer.anchorPoint = CGPoint(x: 1, y: 0.5)
-            break
-        case .right:
-            self.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
-            break
-        case .bottom:
-            self.layer.anchorPoint = CGPoint(x: 0.5, y: 0)
-            break
-        case .top:
-            self.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
-            break
-        case .topLeft:
-            self.layer.anchorPoint = CGPoint(x: 0, y: 1)
-            break
-        case .topRight:
-            self.layer.anchorPoint = CGPoint(x: 1, y: 1)
-            break
-        case .bottomLeft:
-            self.layer.anchorPoint = CGPoint(x: 0, y: 0)
-            break
-        case .bottomRight:
-            self.layer.anchorPoint = CGPoint(x: 1, y: 0)
-            break
-        }
         
         triangleShapeLayer?.removeFromSuperlayer()
         
@@ -229,38 +213,40 @@ open class ZGTooltipView: UIView {
         self.setNeedsLayout()
         self.layoutIfNeeded()
         
+        
         switch self.direction {
             
         case .bottom, .bottomLeft, .bottomRight:
-            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superview, attribute: .bottom, multiplier: 1, constant:  triangleSpacing - (self.bounds.height / 2) ))
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: origin, attribute: .bottom, multiplier: 1, constant:  triangleSpacing ))
             break
             
         case .top, .topRight, .topLeft:
-            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1, constant:  (triangleSpacing - (self.bounds.height / 2)) * -1))
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: origin, attribute: .top, multiplier: 1, constant:  -triangleSpacing))
             break
             
         case .left, .right:
-            superview.addConstraint(NSLayoutConstraint(item: superview, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant:  0))
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: origin, attribute: .centerY, multiplier: 1, constant:  0))
             break
         }
         
         switch self.direction {
         case .left:
-            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: superview, attribute: .left, multiplier: 1, constant: (triangleSpacing - (self.bounds.width / 2)) * -1))
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: origin, attribute: .left, multiplier: 1, constant: -triangleSpacing))
             break
         case .bottomRight, .topRight:
-            self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant:  ((self.bounds.width / 2)) * -1))
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: origin, attribute: .right, multiplier: 1, constant: 0))
             break
         case .bottomLeft, .topLeft:
-            self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant:  ((self.bounds.width / 2))))
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .left, relatedBy: .equal, toItem: origin, attribute: .left, multiplier: 1, constant: 0))
             break
         case .right:
-            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .left, relatedBy: .equal, toItem: superview, attribute: .right, multiplier: 1, constant:  triangleSpacing - (self.bounds.width / 2) ))
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .left, relatedBy: .equal, toItem: origin, attribute: .right, multiplier: 1, constant:  triangleSpacing ))
             break
         case .top, .bottom:
-            self.superview?.addConstraint(NSLayoutConstraint(item: superview, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant:  0))
+            superview.addConstraint(NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: origin, attribute: .centerX, multiplier: 1, constant:  0))
             break
         }
+    
         
         if (animationEnable) {
             
