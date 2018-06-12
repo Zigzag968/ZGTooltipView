@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "RegistrationIntroTitle"; ObjectID = "D51-OV-a1T"; */
+"D51-OV-a1T.text" = "RegistrationIntroTitle";
+
+/* Class = "UILabel"; text = "RegistrationIntroText"; ObjectID = "QqR-ZD-8Mh"; */
+"QqR-ZD-8Mh.text" = "RegistrationIntroText";
+
+/* Class = "UILabel"; text = "LoginIntroText"; ObjectID = "VE5-9V-kfp"; */
+"VE5-9V-kfp.text" = "LoginIntroText";
+
+/* Class = "UILabel"; text = "ForgotPassword"; ObjectID = "WOu-gk-ZUA"; */
+"WOu-gk-ZUA.text" = "ForgotPassword";
+
+/* Class = "UILabel"; text = "LoginIntroTitle"; ObjectID = "Z84-y2-WN7"; */
+"Z84-y2-WN7.text" = "LoginIntroTitle";
+
+/* Class = "UILabel"; text = "Terms"; ObjectID = "fB0-Na-rZS"; */
+"fB0-Na-rZS.text" = "Terms";
+
+/* Class = "UILabel"; text = "NewTextLabel"; ObjectID = "r95-JR-XJg"; */
+"r95-JR-XJg.text" = "NewTextLabel";
