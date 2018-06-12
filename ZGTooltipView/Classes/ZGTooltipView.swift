@@ -319,27 +319,27 @@ open class ZGTooltipView: UIView {
             break
         case .bottom:
             triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 1)
-            triangleShapeLayer.position = CGPoint(x: self.bounds.width/2, y: 0)
+            triangleShapeLayer.position = CGPoint(x: self.bounds.width/2, y: 0.25)
             break
         case .top:
             triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 0)
-            triangleShapeLayer.position = CGPoint(x: self.bounds.width/2, y: self.bounds.height)
+            triangleShapeLayer.position = CGPoint(x: self.bounds.width/2, y: self.bounds.height - 0.25)
             break
         case .topLeft:
             triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 0)
-            triangleShapeLayer.position = CGPoint(x: ZGTooltipView.triangleMargin, y: self.bounds.height)
+            triangleShapeLayer.position = CGPoint(x: ZGTooltipView.triangleMargin, y: self.bounds.height - 0.25)
             break
         case .topRight:
             triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 0)
-            triangleShapeLayer.position = CGPoint(x: self.bounds.width - ZGTooltipView.triangleMargin, y: self.bounds.height)
+            triangleShapeLayer.position = CGPoint(x: self.bounds.width - ZGTooltipView.triangleMargin, y: self.bounds.height - 0.25)
             break
         case .bottomLeft:
             triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 1)
-            triangleShapeLayer.position = CGPoint(x: ZGTooltipView.triangleMargin, y: 0)
+            triangleShapeLayer.position = CGPoint(x: ZGTooltipView.triangleMargin, y: 0.25)
             break
         case .bottomRight:
             triangleShapeLayer.anchorPoint = CGPoint(x: 0.5, y: 1)
-            triangleShapeLayer.position = CGPoint(x: self.bounds.width - ZGTooltipView.triangleMargin, y: 0)
+            triangleShapeLayer.position = CGPoint(x: self.bounds.width - ZGTooltipView.triangleMargin, y: 0.25)
             
             break
         }
