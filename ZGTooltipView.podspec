@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZGTooltipView'
-  s.version          = '2.1.0'
+  s.version          = '2.2.0'
   s.summary          = 'Tooltip View for iOS'
 
   s.description      = <<-DESC
@@ -16,12 +16,11 @@ Tooltip View for iOS.
                        DESC
 
   s.homepage         = 'https://github.com/Zigzag968/ZGTooltipView'
-  # s.screenshots     = 'https://github.com/Zigzag968/ZGTooltipView/raw/master/Example/Screenshot.png?raw=true'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Alexandre Guibert' => 'alexandre968@hotmail.com' }
-  s.source           = { :git => 'https://github.com/Zigzag968/ZGTooltipView.git', :tag => 'v2.1.0' }
+  s.source           = { :git => 'https://github.com/Zigzag968/ZGTooltipView.git', :tag => 'v2.2.0' }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'ZGTooltipView/Classes/**/*'
 

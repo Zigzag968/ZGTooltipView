@@ -13,17 +13,14 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## How to use ?
 
-Just call on your view :
+Just create a tooltip by calling :
 
-    myView.setTooltip(ZGTooltipView(direction: .Top, text: "Lorem ipsum dolor sit amet"))
+    ZGTooltipView(direction: .bottom, text: "Lorem ipsum", originView: originView, removeOnDismiss: false),
 
 You can use these directions : 
 
     .Top, .Left, .Right, .Bottom, .TopLeft, .TopRight, .BottomLeft, .BottomRight
 
-If you want to display the tooltip into another view than the one you are attaching it to (like a parent to avoid your tooltip to be clipped), you can pass it as the second parameter when setting it to your view:    
-
-    myView.setTooltip(ZGTooltipView(direction: .Top, text: "Lorem ipsum dolor sit amet"), displayInView: myView.superview)
 
 ## Requirements
 

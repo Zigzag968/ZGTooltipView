@@ -10,58 +10,41 @@ import UIKit
 import ZGTooltipView
 
 class ViewController: UIViewController {
-    
-    @IBOutlet var B_Button : UIButton!
-    @IBOutlet var BL_Button : UIButton!
-    @IBOutlet var BR_Button : UIButton!
-    @IBOutlet var T_Button : UIButton!
-    @IBOutlet var TL_Button : UIButton!
-    @IBOutlet var TR_Button : UIButton!
-    @IBOutlet var R_Button : UIButton!
-    @IBOutlet var L_Button : UIButton!
-    
-    var buttons : [UIButton]!
+    @IBOutlet var B_Button: UIButton!
+    @IBOutlet var BL_Button: UIButton!
+    @IBOutlet var BR_Button: UIButton!
+    @IBOutlet var T_Button: UIButton!
+    @IBOutlet var TL_Button: UIButton!
+    @IBOutlet var TR_Button: UIButton!
+    @IBOutlet var R_Button: UIButton!
+    @IBOutlet var L_Button: UIButton!
+
+    var tooltips: [ZGTooltipView]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        buttons = [B_Button, BL_Button, BR_Button, T_Button, TL_Button, TR_Button, R_Button, L_Button]
-    }
-    
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let t = ZGTooltipView(direction: .bottom, text: "Bottom Text")
-        
-        B_Button.setTooltip(t)
-        BL_Button.setTooltip(ZGTooltipView(direction: .bottomLeft, text: "Bottom Left Text"))
-        BR_Button.setTooltip(ZGTooltipView(direction: .bottomRight, text: "Bottom Right Text"))
-        T_Button.setTooltip(ZGTooltipView(direction: .top, text: "Top Text"))
-        TL_Button.setTooltip(ZGTooltipView(direction: .topLeft, text: "Top Left Text"))
-        TR_Button.setTooltip(ZGTooltipView(direction: .topRight, text: "Top Right Text"))
-        R_Button.setTooltip(ZGTooltipView(direction: .right, text: "Right Text"))
-        L_Button.setTooltip(ZGTooltipView(direction: .left, text: "Left Text"))
-
+        tooltips = [
+            ZGTooltipView(direction: .bottom, text: "Bottom Text", originView: B_Button, removeOnDismiss: false),
+            ZGTooltipView(direction: .bottomLeft, text: "Bottom Left Text", originView: BL_Button, removeOnDismiss: false),
+            ZGTooltipView(direction: .bottomRight, text: "Bottom Right Text", originView: BR_Button, removeOnDismiss: false),
+            ZGTooltipView(direction: .top, text: "Top Text", originView: T_Button, removeOnDismiss: false),
+            ZGTooltipView(direction: .topLeft, text: "Top Left Text", originView: TL_Button, removeOnDismiss: false),
+            ZGTooltipView(direction: .topRight, text: "Top Right Text", originView: TR_Button, removeOnDismiss: false),
+            ZGTooltipView(direction: .right, text: "Right Text", originView: R_Button, removeOnDismiss: false),
+            ZGTooltipView(direction: .left, text: "Left Text", originView: L_Button, removeOnDismiss: false),
+        ]
     }
-    
-    @IBAction func showAllTooltips(_ sender: AnyObject) {
-        for button in buttons {
-            button.showTooltip()
+
+    @IBAction func showAllTooltips(_: AnyObject) {
+        for tooltip in tooltips {
+            tooltip.displayTooltip()
         }
     }
-    
-    @IBAction func hideAllTooltips(_ sender: AnyObject) {
-        for button in buttons {
-            button.dismissTooltip()
+
+    @IBAction func hideAllTooltips(_: AnyObject) {
+        for tooltip in tooltips {
+            tooltip.dismiss(remove: false)
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
 }
-
