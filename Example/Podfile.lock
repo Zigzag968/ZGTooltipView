@@ -1,16 +1,16 @@
 PODS:
-  - ZGTooltipView (1.2.7)
+  - ZGTooltipView (3.0.0)
 
 DEPENDENCIES:
   - ZGTooltipView (from `../`)
 
 EXTERNAL SOURCES:
   ZGTooltipView:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  ZGTooltipView: 551abd04a3e9d6e5014d782d684ce2657a99a752
+  ZGTooltipView: b6637153e8a654d02beb0bf87eff5a007008767e
 
-PODFILE CHECKSUM: b7f8db003875034d8ff70f84657021cfe685bbbe
+PODFILE CHECKSUM: 495941b532f1b28a1cbe364f77f952f87e2a8255
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.7.2

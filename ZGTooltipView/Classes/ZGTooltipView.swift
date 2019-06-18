@@ -108,12 +108,12 @@ open class ZGTooltipView: UIView {
         addSubview(contentView)
 
         for (fromAttr, toAttr) in [
-            NSLayoutAttribute.top: NSLayoutAttribute.topMargin,
-            NSLayoutAttribute.right: NSLayoutAttribute.rightMargin,
-            NSLayoutAttribute.bottom: NSLayoutAttribute.bottomMargin,
-            NSLayoutAttribute.left: NSLayoutAttribute.leftMargin,
+            NSLayoutConstraint.Attribute.top: NSLayoutConstraint.Attribute.topMargin,
+            NSLayoutConstraint.Attribute.right: NSLayoutConstraint.Attribute.rightMargin,
+            NSLayoutConstraint.Attribute.bottom: NSLayoutConstraint.Attribute.bottomMargin,
+            NSLayoutConstraint.Attribute.left: NSLayoutConstraint.Attribute.leftMargin,
         ] {
-            addConstraint(NSLayoutConstraint(item: contentView, attribute: fromAttr, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: toAttr, multiplier: 1, constant: 0))
+            addConstraint(NSLayoutConstraint(item: contentView, attribute: fromAttr, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: toAttr, multiplier: 1, constant: 0))
         }
     }
 
@@ -184,7 +184,7 @@ open class ZGTooltipView: UIView {
 
         hostingView.addSubview(self)
 
-        self.layoutMargins = UIEdgeInsetsMake(8, 13, 8, 13)
+        self.layoutMargins = UIEdgeInsets.init(top: 8, left: 13, bottom: 8, right: 13)
         self.layer.cornerRadius = 4
 
         triangleShapeLayer?.removeFromSuperlayer()
@@ -219,7 +219,7 @@ open class ZGTooltipView: UIView {
         let triangleYSpacing: CGFloat = triangleShapeLayer.bounds.height / 2 + 5
         let triangleXSpacing: CGFloat = ZGTooltipView.triangleMargin
 
-        let size = self.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        let size = self.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
 
         var computedOrigin = CGPoint.zero
         let convertedOrigin = hostingView.convert(computedOrigin, from: originView)
